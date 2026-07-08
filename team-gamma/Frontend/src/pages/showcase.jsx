@@ -4,37 +4,37 @@ const projects = [
   {
     title: "Restaurant Website",
     category: "Food & Beverage",
-    image: "/samples/restaurant.jpg",
+    image: "/showcase/restaurant.png",
     demo: "https://restaurant-demo.vercel.app"
   },
   {
     title: "Dental Clinic",
     category: "Healthcare",
-    image: "/samples/dental.jpg",
+    image: "/showcase/dental.jpeg",
     demo: "https://dental-demo.vercel.app"
   },
   {
     title: "Gym Landing Page",
     category: "Fitness",
-    image: "/samples/gym.jpg",
+    image: "/showcase/gym.jpg",
     demo: "https://gym-demo.vercel.app"
   },
   {
     title: "Fashion Store",
     category: "E-Commerce",
-    image: "/samples/fashion.jpg",
+    image: "/showcase/fashion.png",
     demo: "https://fashion-demo.vercel.app"
   },
   {
     title: "Real Estate",
     category: "Business",
-    image: "/samples/realestate.jpg",
+    image: "/showcase/real-estate.png",
     demo: "https://realestate-demo.vercel.app"
   },
   {
     title: "Portfolio",
     category: "Personal Brand",
-    image: "/samples/portfolio.jpg",
+    image: "/showcase/portfolio.jpg",
     demo: "https://portfolio-demo.vercel.app"
   }
 ];

@@ -2,7 +2,7 @@ import React from "react";
 import { Instagram, ArrowRight } from "lucide-react";
 import BrowserWindow from "./BrowserWindow.jsx";
 import TypingURL from "./TypingURL.jsx";
-
+import { instagramHref } from "../config/links";
 export default function Hero() {
   const scrollToServices = (e) => {
     e.preventDefault();
@@ -33,9 +33,15 @@ export default function Hero() {
           </p>
 
           <div className="vn-hero__actions">
-            <a href="#" className="vn-btn vn-btn--solid">
+            <a
+              href={instagramHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="vn-btn vn-btn--solid"
+            >
               <Instagram size={16} /> DM Us on Instagram
             </a>
+
             <a href="#services" className="vn-btn vn-btn--ghost" onClick={scrollToServices}>
               View Pricing <ArrowRight size={16} />
             </a>

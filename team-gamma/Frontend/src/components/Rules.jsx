@@ -1,8 +1,8 @@
 import React from "react";
-import { Wallet, ShieldCheck, Clock } from "lucide-react";
+import { Wallet, ShieldCheck, Clock, Instagram, Mail } from "lucide-react";
 import BrowserWindow from "./BrowserWindow.jsx";
 import Clause from "./Clause.jsx";
-
+import { instagramHref, emailHref } from "../config/links";
 export default function Rules() {
   return (
     <section className="vn-section" id="rules">
@@ -44,11 +44,17 @@ export default function Rules() {
         <h3>Agree with the terms?</h3>
         <p>DM us on Instagram or email to begin your onboarding.</p>
         <div className="vn-hero__actions" style={{ justifyContent: "center" }}>
-          <a href="#" className="vn-btn vn-btn--solid">
-            Message on Instagram
+          <a
+            href={instagramHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="vn-btn vn-btn--solid"
+          >
+            <Instagram size={16} /> Message on Instagram
           </a>
-          <a href="#" className="vn-btn vn-btn--ghost">
-            Email Our Team
+
+          <a href={emailHref} className="vn-btn vn-btn--ghost">
+            <Mail size={16} /> Email Our Team
           </a>
         </div>
       </div>

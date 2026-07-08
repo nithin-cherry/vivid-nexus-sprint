@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { ArrowLeft, Instagram, Mail, CheckCircle2 } from "lucide-react";
 import BrowserWindow from "../components/BrowserWindow.jsx";
-
+import { instagramHref, emailHref } from "../config/links";
 export default function Checkout() {
   const { planSlug } = useParams();
   const location = useLocation();
@@ -139,14 +139,15 @@ export default function Checkout() {
             </p>
             <div className="vn-hero__actions" style={{ marginTop: 18 }}>
               <a
-                href="https://instagram.com"
+                href={instagramHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="vn-btn vn-btn--solid"
               >
                 <Instagram size={16} /> Message on Instagram
               </a>
-              <a href="mailto:hello@vividnexus.in" className="vn-btn vn-btn--ghost">
+
+              <a href={emailHref} className="vn-btn vn-btn--ghost">
                 <Mail size={16} /> Email Our Team
               </a>
             </div>
