@@ -140,7 +140,7 @@
             #smart-chat-widget-root .chatApp-chat-send-btn:hover {
                 opacity: 0.9;
             }
-            .chat-app.hidden {
+            #smart-chat-widget-root-hidden {
                 display: none;
             }
 
@@ -163,6 +163,9 @@
                 font-size: 28px;
                 color: #000;
             }
+            .chat-toggle-btn.hidden {
+              display: none
+            }
             .chat-toggle-btn:hover {
                 transform: scale(1.08);
                 box-shadow: 0 6px 28px rgba(0, 212, 255, 0.6);
@@ -176,13 +179,12 @@
     document.head.appendChild(stylesheet);
 
     const chatApp = document.createElement("div");
-    
-    chatApp.classList.add("chat-app", "hidden");
+
 	  const toggleBtn = document.createElement("button");
     toggleBtn.classList.add("chat-toggle-btn");
     toggleBtn.textContent = "💬";
     
-    chatApp.classList.add("chat-app");
+    // chatApp.classList.add("chat-app");
     chatApp.id = "smart-chat-widget-root";
     let isTyping = false;
 
@@ -298,12 +300,12 @@
     });
 
     toggleBtn.addEventListener('click', () => {
-      chatApp.classList.remove('hidden');
+      chatApp.id = "smart-chat-widget-root"
       toggleBtn.classList.add('hidden');
     });
 
     closeBtn.addEventListener('click', () => {
-        chatApp.classList.add('hidden');
+        chatApp.id = "smart-chat-widget-root-hidden"
         toggleBtn.classList.remove('hidden');
     });
 
