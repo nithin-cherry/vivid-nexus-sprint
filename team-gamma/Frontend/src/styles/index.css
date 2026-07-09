@@ -932,3 +932,13 @@ h3 {
   line-height: 1.6;
   max-width: 380px;
 }
+.vn-form__error {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin: 0;
+}
+
+.vn-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
