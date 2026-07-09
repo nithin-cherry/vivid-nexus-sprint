@@ -935,7 +935,7 @@ h3 {
 
 /* ── Chat Widget ── */
 
-.vn-widget-toggle {
+.vn-chatbot-toggle {
   position: fixed;
   bottom: 24px;
   right: 24px;
@@ -953,12 +953,12 @@ h3 {
   transition: transform 0.2s, box-shadow 0.2s;
   color: var(--text);
 }
-.vn-widget-toggle:hover {
+.vn-chatbot-toggle:hover {
   transform: scale(1.08);
   box-shadow: 0 6px 28px var(--surface);
 }
 
-.vn-widget {
+.vn-chatbot {
   position: fixed;
   bottom: 24px;
   right: 24px;
@@ -977,7 +977,7 @@ h3 {
   z-index: 9999;
 }
 
-.vn-widget__header {
+.vn-chatbot__header {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -985,7 +985,7 @@ h3 {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
-.vn-widget__dot {
+.vn-chatbot__dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -993,14 +993,14 @@ h3 {
   box-shadow: 0 0 8px var(--bg-alt);
   flex-shrink: 0;
 }
-.vn-widget__title {
+.vn-chatbot__title {
   flex: 1;
   margin: 0;
   color: var(--text);
   font-size: 15px;
   font-weight: 600;
 }
-.vn-widget__close {
+.vn-chatbot__close {
   background: none;
   border: none;
   color: var(--text);
@@ -1010,11 +1010,11 @@ h3 {
   line-height: 1;
   transition: color 0.2s;
 }
-.vn-widget__close:hover {
+.vn-chatbot__close:hover {
   color: var(--muted);
 }
 
-.vn-widget__messages {
+.vn-chatbot__messages {
   flex: 1;
   padding: 16px;
   overflow-y: auto;
@@ -1022,7 +1022,7 @@ h3 {
   flex-direction: column;
   gap: 12px;
 }
-.vn-widget__bubble {
+.vn-chatbot__bubble {
   padding: 10px 14px;
   border-radius: 12px;
   max-width: 80%;
@@ -1031,21 +1031,21 @@ h3 {
   background: var(--bg);
   color: var(--text);
 }
-.vn-widget__bubble--user {
+.vn-chatbot__bubble--user {
   align-self: flex-end;
 }
-.vn-widget__bubble--bot {
+.vn-chatbot__bubble--bot {
   align-self: flex-start;
 }
 
-.vn-widget__input-row {
+.vn-chatbot__input-row {
   display: flex;
   gap: 10px;
   padding: 16px;
   background: var(--bg);
   border-top: 1px solid var(--border);
 }
-.vn-widget__input {
+.vn-chatbot__input {
   flex: 1;
   background: var(--bg);
   border: 1px solid var(--border);
@@ -1056,13 +1056,13 @@ h3 {
   outline: none;
   font-family: inherit;
 }
-.vn-widget__input:focus {
+.vn-chatbot__input:focus {
   border-color: var(--border);
 }
-.vn-widget__input:disabled {
+.vn-chatbot__input:disabled {
   opacity: 0.5;
 }
-.vn-widget__send {
+.vn-chatbot__send {
   background: var(--surface);
   color: var(--text);
   border: none;
@@ -1074,10 +1074,10 @@ h3 {
   transition: opacity 0.2s;
   font-family: inherit;
 }
-.vn-widget__send:hover {
+.vn-chatbot__send:hover {
   opacity: 0.9;
 }
-.vn-widget__send:disabled {
+.vn-chatbot__send:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
