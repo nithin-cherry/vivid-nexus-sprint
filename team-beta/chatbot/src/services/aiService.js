@@ -16,7 +16,7 @@ const generateAIStream = async (userMessage, history, onChunk, onDone) => {
         });
         const queryVector = embeddingResponse.embeddings[0].values;
 
-        console.log("🔍 Running Vector Search for message:", userMessage);
+        //console.log("🔍 Running Vector Search for message:", userMessage);
 
         // 2. Query MongoDB Vector Search Index
         const matchingChunks = await Knowledge.aggregate([
@@ -31,7 +31,7 @@ const generateAIStream = async (userMessage, history, onChunk, onDone) => {
             }
         ]);
 
-        console.log("📦 Found matching chunks from Atlas:", matchingChunks);
+        //console.log("📦 Found matching chunks from Atlas:", matchingChunks);
 
         // 3. Extrapolate match content strings
         const contextText = matchingChunks.length > 0
