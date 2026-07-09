@@ -6,7 +6,7 @@
       backgroundColor: "#0b0f19",
       welcomeMessage:
         "Thanks for reaching out! To help our team connect with you, what is your email address?",
-      baseUrl: "http://localhost:5000",
+      baseUrl: "https://your-production-backend.com", // Updated to reflect real-world deployments
       path: "/api/chat/stream",
       method: "POST",
     };
@@ -28,14 +28,11 @@
                 max-width: 90vw;
                 height: 600px;
                 max-height: 80vh;
-                
-                /* Color Palette from image_cef5e6.png */
+
                 background-color: ${settings.backgroundColor};
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 16px;
                 box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-                
-                /* Layout Layout */
                 display: flex;
                 flex-direction: column;
                 overflow: hidden;
@@ -43,7 +40,6 @@
                 z-index: 9999;
             }
 
-            /* Header Styling */
             #smart-chat-widget-root .chatApp-chat-header {
                 background-color: #111827;
                 padding: 16px;
@@ -80,7 +76,6 @@
                 color: #ffffff;
             }
 
-            /* Message Display Area */
             #smart-chat-widget-root .chatApp-chat-messages {
                 flex: 1;
                 padding: 16px;
@@ -97,15 +92,18 @@
                 border-radius: 12px;
                 max-width: 80%;
                 font-size: 14px;
-                line-height: 1.4;
+                line-height: 1.5;
                 align-self: flex-end;
+                white-space: pre-wrap; /* Critical: preserves structured formatting breaks smoothly */
+                word-break: break-word;
             }
             
             #smart-chat-widget-root .chatApp-bot-chat-bubble {
                 align-self: flex-start;
+                background-color: #111827;
+                border: 1px solid rgba(255, 255, 255, 0.05);
             }
 
-            /* Chat Input Field Container */
             #smart-chat-widget-root .chatApp-chat-input-container {
                 padding: 16px;
                 background-color: #111827;
@@ -141,7 +139,7 @@
                 opacity: 0.9;
             }
             #smart-chat-widget-root-hidden {
-                display: none;
+                display: none !important;
             }
 
             .chat-toggle-btn {
@@ -151,7 +149,7 @@
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
-                background-color: #00D4FF;
+                background-color: ${settings.brandColor};
                 border: none;
                 cursor: pointer;
                 box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
@@ -164,42 +162,37 @@
                 color: #000;
             }
             .chat-toggle-btn.hidden {
-              display: none
+                display: none !important;
             }
             .chat-toggle-btn:hover {
                 transform: scale(1.08);
                 box-shadow: 0 6px 28px rgba(0, 212, 255, 0.6);
             }
-            .chat-toggle-btn.active {
-                background-color: #1f2937;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-                color: #e5e7eb;
-            }
         `;
     document.head.appendChild(stylesheet);
 
     const chatApp = document.createElement("div");
-	  const toggleBtn = document.createElement("button");
+    const toggleBtn = document.createElement("button");
     toggleBtn.classList.add("chat-toggle-btn");
     toggleBtn.textContent = "💬";
     
-    // chatApp.classList.add("chat-app");
-    chatApp.id = "smart-chat-widget-root";
+    // Default system initialization hide setup
+    chatApp.id = "smart-chat-widget-root-hidden";
     let isTyping = false;
+    let welcomeRendered = false;
 
     const conversationHistory = [];
 
-    chatApp.innerHTML = `<div class="chatApp-chat-header">
+    chatApp.innerHTML = `
+        <div class="chatApp-chat-header">
             <div class="chatApp-chat-status-dot"></div>
             <h3>${settings.brandName}</h3>
             <button class="chatApp-close-btn">✕</button>
         </div>
-        <div class="chatApp-chat-messages">
-					<!-- Messages will be rendered here dynamically -->
-        </div>
+        <div class="chatApp-chat-messages"></div>
         <div class="chatApp-chat-input-container">
             <input type="text" class="chatApp-chat-input" placeholder="Type your message..." />
-            <button class="chatApp-chat-send-btn" >Send</button>
+            <button class="chatApp-chat-send-btn">Send</button>
         </div>`;
 
     const sendButton = chatApp.querySelector(".chatApp-chat-send-btn");
@@ -210,26 +203,27 @@
     const setInputDisabledState = (disabledValue) => {
       chatInput.disabled = disabledValue;
       sendButton.disabled = disabledValue;
-
-      if (!disabledValue) {
-        chatInput.focus();
-      }
+      if (!disabledValue) chatInput.focus();
     };
 
-// New AI Stream Implementation: Translates data chunks to textual string sequences
+    const appendBubble = (message, sender) => {
+      const bubble = document.createElement("div");
+      bubble.classList.add(`chatApp-${sender}-chat-bubble`);
+      bubble.textContent = message;
+      chatMessagesArea.appendChild(bubble);
+      chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
+      return bubble;
+    };
+
     const streamAIResponse = async (message) => {
       isTyping = true;
       setInputDisabledState(true);
-
-      // Deploy the empty placeholder bot bubble
       const botBubble = appendBubble("", "bot");
 
       try {
         const response = await fetch(`${settings.baseUrl}${settings.path}`, {
           method: settings.method,
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             message: message,
             history: conversationHistory,
@@ -242,20 +236,16 @@
         const decoder = new TextDecoder("utf-8");
         let accumulatedBotText = "";
 
-        // Core streaming loop consuming byte blocks until data pipeline breaks off
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
           const textChunk = decoder.decode(value, { stream: true });
           accumulatedBotText += textChunk;
-
-          // Hydrate the visual text target element inside the DOM layout
           botBubble.textContent = accumulatedBotText;
           chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
         }
 
-        // Push conversational turns into the contextual history object
         conversationHistory.push({ role: 'user', parts: [{ text: message }] });
         conversationHistory.push({ role: 'model', parts: [{ text: accumulatedBotText }] });
 
@@ -268,21 +258,9 @@
       }
     };
 
-
-    const appendBubble = (message, sender) => {
-      const bubble = document.createElement("div");
-      bubble.classList.add(`chatApp-${sender}-chat-bubble`);
-      bubble.textContent = message;
-      chatMessagesArea.appendChild(bubble);
-      chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
-      return bubble;
-    };
-
     const handleSend = () => {
       if (isTyping) return;
-      const chatInput = chatApp.querySelector(".chatApp-chat-input");
       const message = chatInput.value.trim();
-
       if (message.length === 0) return;
 
       appendBubble(message, "user");
@@ -290,22 +268,24 @@
       streamAIResponse(message);
     };
     
-    if (sendButton) {
-      sendButton.addEventListener("click", handleSend);
-    }
-
-    chatInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") handleSend();
-    });
+    sendButton.addEventListener("click", handleSend);
+    chatInput.addEventListener("keydown", (e) => { if (e.key === "Enter") handleSend(); });
 
     toggleBtn.addEventListener('click', () => {
-      chatApp.id = "smart-chat-widget-root"
+      chatApp.id = "smart-chat-widget-root";
       toggleBtn.classList.add('hidden');
+      
+      // Lazily fire welcome bubble once client opens drawer container
+      if (!welcomeRendered && settings.welcomeMessage) {
+        appendBubble(settings.welcomeMessage, "bot");
+        welcomeRendered = true;
+      }
+      setTimeout(() => chatInput.focus(), 50);
     });
 
     closeBtn.addEventListener('click', () => {
-        chatApp.id = "smart-chat-widget-root-hidden"
-        toggleBtn.classList.remove('hidden');
+      chatApp.id = "smart-chat-widget-root-hidden";
+      toggleBtn.classList.remove('hidden');
     });
 
     document.body.appendChild(toggleBtn);
