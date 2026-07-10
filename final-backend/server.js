@@ -1,8 +1,10 @@
+import dns from "node:dns";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
+dns.setDefaultResultOrder("ipv4first");
 dotenv.config();
 
 const app = express();
@@ -40,7 +42,6 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   requireTLS: true,
-  family: 4,
   connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 15000,
