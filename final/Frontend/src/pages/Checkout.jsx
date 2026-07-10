@@ -24,7 +24,7 @@ export default function Checkout() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const API_URL = "https://vivid-nexus-sprint-1.onrender.com";
+  const API_URL = "https://vivid-nexus-sprint-47ro.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
