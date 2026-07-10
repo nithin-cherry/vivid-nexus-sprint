@@ -24,7 +24,7 @@ export default function Checkout() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const API_URL = "https://vivid-nexus-sprint.onrender.com";
+  const API_URL = "https://vivid-nexus-sprint-1.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -168,7 +168,7 @@ export default function Checkout() {
             </p>
             <div className="vn-hero__actions" style={{ marginTop: 18 }}>
               <a
-                href="https://instagram.com/vividnexus.in"
+                href="https://www.instagram.com/vividnexus.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="vn-btn vn-btn--solid"
