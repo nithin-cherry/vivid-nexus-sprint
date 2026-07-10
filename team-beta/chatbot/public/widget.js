@@ -6,7 +6,7 @@
       backgroundColor: "#0b0f19",
       welcomeMessage:
         "Thanks for reaching out! To help our team connect with you, what is your email address?",
-      baseUrl: "http://localhost:5000", // Updated to reflect real-world deployments
+      baseUrl: "https://chatbot-backend-liard-eta.vercel.app", // Updated to reflect real-world deployments
       path: "/api/chat/stream",
       method: "POST",
     };
