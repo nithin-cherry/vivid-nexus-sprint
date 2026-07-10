@@ -33,6 +33,14 @@ const projects = [
     Description:
       "A modern cafe website built using React and Vite. Features elegant layouts, responsive sections, menu highlights, and seamless navigation. Showcases signature beverages, café locations, brand story, and contact information while delivering a warm and engaging experience across every device."
   },
+  {
+    title: "CHRONOLUX",
+    category: "Watch",
+    image: "/samples/CHRONOLUX.jpg",
+    demo: "https://chronolux-pi.vercel.app/",
+    Description:
+      "A premium luxury watch store website built using React and Tailwind CSS. Features elegant layouts, intuitive navigation, responsive sections, and smooth animations. Showcases high-end watch collections, brand heritage, and customer testimonials while delivering an exquisite browsing experience across every device."
+  },
 ];
 
 export default function Showcase() {
