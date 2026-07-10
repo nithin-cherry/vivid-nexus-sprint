@@ -55,7 +55,7 @@ app.post('/api/onboarding/start', async (req, res) => {
 });
 
 // 3. AI Chat Stream
-app.post('/api/chat/stream', async () => {
+app.post('/api/chat/stream', async (req, res) => {
     await connectToDatabase();    
     handleChatStream(req, res);
 });
