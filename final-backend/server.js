@@ -94,20 +94,19 @@ Submitted At: ${timestamp || new Date().toISOString()}
 
         console.log("Lead received:", req.body);
 
-        transporter
-            .sendMail({
-                from: `"Vivid Nexus Website" <${process.env.MAIL_USER}>`,
-                to: process.env.CEO_EMAIL,
-                replyTo: email,
-                subject: `New Lead - ${selectedPlan || "Vivid Nexus"}`,
-                text: leadText,
-            })
-            .then(() => {
-                console.log("Lead email sent successfully");
-            })
-            .catch((error) => {
-                console.error("Lead email failed:", error);
-            });
+        await transporter.verify();
+        console.log("Mail transporter verified");
+
+        const info = await transporter.sendMail({
+            from: `"Vivid Nexus Website" <${process.env.MAIL_USER}>`,
+            to: process.env.CEO_EMAIL,
+            replyTo: email,
+            subject: `New Lead - ${selectedPlan || "Vivid Nexus"}`,
+            text: leadText,
+        });
+
+        console.log("Lead email sent successfully to:", process.env.CEO_EMAIL);
+        console.log("Message ID:", info.messageId);
 
         return res.status(200).json({
             success: true,
