@@ -51,7 +51,7 @@ const generateAIStream = async (userMessage, history, onChunk, onDone) => {
 
         // 5. Build strict streaming session
         const responseStream = await ai.models.generateContentStream({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3-flash-preview',
             contents: contents,
             config: {
                 systemInstruction: `You are a professional website support assistant for Vivid Nexus.
@@ -59,8 +59,8 @@ const generateAIStream = async (userMessage, history, onChunk, onDone) => {
 CRITICAL BOUNDARIES:
 - Answer the user's question using the facts provided in the [WEBSITE KNOWLEDGE CONTEXT].
 - If the user asks general questions about our services or pricing, use the provided context to summarize our web architecture, AI automation, or branding levels.
-- If the context genuinely doesn't contain the answer, or if they ask completely unrelated non-business questions, politely decline to answer and instruct them to contact support via email at support@vividnexus.com.
-- Keep answers highly professional, concise, and beautifully structured.
+- On welcome or if the context genuinely doesn't contain the answer, or if they ask completely unrelated non-business questions, politely decline to answer and instruct them to contact support via email at support@vividnexus.com.
+- Keep answers highly professional, concise, and beautifully structured and short if not necessary.
 - DO NOT use markdown bullet symbols like asterisks (*). Use clear line breaks and plain spacing to separate your points so it reads beautifully on a standard text display.`,
                 temperature: 0.2
             }
