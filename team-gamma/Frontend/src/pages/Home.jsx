@@ -9,7 +9,6 @@ import Rules from "../components/Rules.jsx";
 import Testimonials from "../components/Testimonials.jsx";
 import FinalCTA from "../components/FinalCTA.jsx";
 import Footer from "../components/Footer.jsx";
-import Chatbot from "../components/Chatbot.jsx";
 
 export default function Home() {
   useBrandFonts();
@@ -19,10 +18,6 @@ export default function Home() {
       <Nav />
       <Hero />
       <Stats />
-      <Chatbot
-        brandName="Vivid Nexus"
-        brandColor="#22c55e"
-      />
       <Services />
       <Rules />
       <Testimonials />
