@@ -2,79 +2,33 @@ import React, { useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { ArrowLeft, Instagram, Mail, CheckCircle2 } from "lucide-react";
 import BrowserWindow from "../components/BrowserWindow.jsx";
-import { instagramHref, emailHref } from "../config/links";
-import { submitLead } from "../services/api";
 
 export default function Checkout() {
   const { planSlug } = useParams();
   const location = useLocation();
 
+  // Plan details are passed via navigate(..., { state }). Fall back to the
+  // slug (e.g. if someone lands here directly via a shared URL) so the page
+  // never looks broken.
   const plan = location.state || {
-    title:
-      planSlug?.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) ||
-      "Selected Plan",
+    title: planSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
     price: null,
     per: "",
     desc: "",
   };
 
-  const [form, setForm] = useState({
-    clientName: "",
-    email: "",
-    whatsappNumber: "",
-    corporateUrl: "",
-    message: "",
-  });
-
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    setError("");
-    setSubmitted(false);
-
-    if (!form.clientName.trim()) {
-      setError("Please enter your name.");
-      return;
-    }
-
-    if (!form.email.trim()) {
-      setError("Please enter your email.");
-      return;
-    }
-
-    if (!form.whatsappNumber.trim()) {
-      setError("Please enter your WhatsApp number.");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      await submitLead({
-        clientName: form.clientName,
-        email: form.email,
-        whatsappNumber: form.whatsappNumber,
-        corporateUrl: form.corporateUrl,
-        selectedPlan: plan.title,
-        planPrice: plan.price || "",
-        message: form.message,
-        timestamp: new Date().toISOString(),
-      });
-
-      setSubmitted(true);
-    } catch (err) {
-      setError(err.message || "Could not submit your request. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    // No backend is wired up yet — this just confirms the request locally.
+    // Swap this out for a real API call / form service when ready.
+    setSubmitted(true);
   };
 
   return (
@@ -84,7 +38,6 @@ export default function Checkout() {
           <Link to="/" className="vn-logo">
             Vivid<span>Nexus</span>
           </Link>
-
           <Link to="/" className="vn-btn vn-btn--ghost">
             <ArrowLeft size={15} /> Back to site
           </Link>
@@ -98,11 +51,9 @@ export default function Checkout() {
               <span className="vn-dot" />
               CHECKOUT
             </div>
-
             <h1 className="vn-h2" style={{ marginTop: 12 }}>
               {plan.title}
             </h1>
-
             {plan.price && (
               <div className="vn-price vn-price--sm" style={{ marginTop: 14 }}>
                 <span className="vn-price__currency">₹</span>
@@ -110,37 +61,33 @@ export default function Checkout() {
                 {plan.per && <span className="vn-price__per">/{plan.per}</span>}
               </div>
             )}
-
             {plan.desc && <p className="vn-checkout__desc">{plan.desc}</p>}
 
             <BrowserWindow url="vividnexus.in/checkout" className="vn-checkout__window">
               {submitted ? (
                 <div className="vn-checkout__success">
                   <CheckCircle2 size={32} />
-
                   <h3>Request received!</h3>
-
                   <p>
-                    Thanks {form.clientName || "there"} — we&apos;ve got your
-                    details for <strong>{plan.title}</strong>. Our team will
-                    reach out within 24 hours to confirm scope and next steps.
+                    Thanks {form.name || "there"} — we've got your details for{" "}
+                    <strong>{plan.title}</strong>. Our team will reach out within 24
+                    hours to confirm scope and next steps.
                   </p>
                 </div>
               ) : (
                 <form className="vn-form" onSubmit={handleSubmit}>
                   <div className="vn-form__row">
-                    <label htmlFor="clientName">Full name</label>
+                    <label htmlFor="name">Full name</label>
                     <input
-                      id="clientName"
-                      name="clientName"
+                      id="name"
+                      name="name"
                       type="text"
                       placeholder="Your name"
-                      value={form.clientName}
+                      value={form.name}
                       onChange={handleChange}
                       required
                     />
                   </div>
-
                   <div className="vn-form__row">
                     <label htmlFor="email">Email</label>
                     <input
@@ -153,32 +100,18 @@ export default function Checkout() {
                       required
                     />
                   </div>
-
                   <div className="vn-form__row">
-                    <label htmlFor="whatsappNumber">Phone / WhatsApp</label>
+                    <label htmlFor="phone">Phone / WhatsApp</label>
                     <input
-                      id="whatsappNumber"
-                      name="whatsappNumber"
+                      id="phone"
+                      name="phone"
                       type="tel"
                       placeholder="+91"
-                      value={form.whatsappNumber}
+                      value={form.phone}
                       onChange={handleChange}
                       required
                     />
                   </div>
-
-                  <div className="vn-form__row">
-                    <label htmlFor="corporateUrl">Corporate / business URL</label>
-                    <input
-                      id="corporateUrl"
-                      name="corporateUrl"
-                      type="url"
-                      placeholder="https://yourcompany.com"
-                      value={form.corporateUrl}
-                      onChange={handleChange}
-                    />
-                  </div>
-
                   <div className="vn-form__row">
                     <label htmlFor="message">Anything we should know?</label>
                     <textarea
@@ -190,15 +123,8 @@ export default function Checkout() {
                       onChange={handleChange}
                     />
                   </div>
-
-                  {error && <p className="vn-form__error">{error}</p>}
-
-                  <button
-                    type="submit"
-                    className="vn-btn vn-btn--solid vn-btn--block"
-                    disabled={loading}
-                  >
-                    {loading ? "Submitting..." : "Confirm & Get Started"}
+                  <button type="submit" className="vn-btn vn-btn--solid vn-btn--block">
+                    Confirm &amp; Get Started
                   </button>
                 </form>
               )}
@@ -207,23 +133,20 @@ export default function Checkout() {
 
           <div className="vn-checkout__contact">
             <h3>Prefer to talk it through first?</h3>
-
             <p>
               DM us on Instagram or email our team directly — we typically reply
               within a few hours.
             </p>
-
             <div className="vn-hero__actions" style={{ marginTop: 18 }}>
               <a
-                href={instagramHref}
+                href="https://instagram.com/vividnexus.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="vn-btn vn-btn--solid"
               >
                 <Instagram size={16} /> Message on Instagram
               </a>
-
-              <a href={emailHref} className="vn-btn vn-btn--ghost">
+              <a href="mailto:hello@vividnexus.in" className="vn-btn vn-btn--ghost">
                 <Mail size={16} /> Email Our Team
               </a>
             </div>
