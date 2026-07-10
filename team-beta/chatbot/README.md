@@ -1,4 +1,4 @@
-# 🚀 Vivid Nexus AI Chatbot
+# Vivid Nexus AI Chatbot
 
 > A lightweight, embeddable AI chatbot widget that can be integrated into any website with a single script tag.
 
