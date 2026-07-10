@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { ArrowLeft, Instagram, Mail, CheckCircle2 } from "lucide-react";
 import BrowserWindow from "../components/BrowserWindow.jsx";
+const API_URL = import.meta.env.VITE_API_URL;
+console.log("API_URL:", API_URL);
 
 export default function Checkout() {
   const { planSlug } = useParams();
