@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const mongoose = require('mongoose');
 require("dotenv").config({ path: "../.env" }); // Ensure .env is in the /server folder
 
 console.log("--- Initializing Server ---");
@@ -7,6 +8,11 @@ console.log("--- Initializing Server ---");
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Database Connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("Connected to MongoDB Atlas successfully"))
+  .catch((err) => console.error("Database connection error:", err));
 
 const razorpay = require("./config/razorpayConfig");
 console.log("Razorpay SDK Configured Successfully");
