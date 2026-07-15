@@ -10,45 +10,60 @@ function App() {
     setError(null);
 
     try {
+      // 1. Create Order
       const res = await fetch(
         "http://localhost:8080/api/payments/create-order",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: 500 * 100, currency: "INR" }),
+          body: JSON.stringify({ amount: 500, currency: "INR" }), //amount in rupee by the frontend
         },
       );
 
-      if (!res.ok) {
-        console.log("came here")
-        throw new Error(`Server responded with ${res.status}`);
-      }
+      if (!res.ok) throw new Error("Failed to create order");
 
-      const { orderId } = await res.json();
+      const orderData = await res.json();
+      const orderId = orderData.id; // Fixed: accessing 'id' correctly
 
+      // 2. Setup Options
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-        amount: 500 * 100,
+        amount: 500,
         currency: "INR",
         name: "Payment Demo",
         description: "Test Transaction",
         order_id: orderId,
         handler: async function (response) {
-            const verifyPaymentRes = await fetch('http://localhost:8080/api/payments/verify-payment', {
+          const payload = {
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          };
+
+          try {
+            const verifyPaymentRes = await fetch(
+              "http://localhost:8080/api/payments/verify-payment",
+              {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ razorpay_payment_id: response.razorpay_payment_id, razorpay_order_id: response.razorpay_order_id, razorpay_signature: response.razorpay_signature})
-            })
+                body: JSON.stringify(payload), // Send the 3 fields
+              },
+            );
+
             if (!verifyPaymentRes.ok) {
-                throw new Error('Payment Failed')
+              // If it still fails, check the server terminal for the specific error!
+              throw new Error("Payment verification failed");
             }
-        }
+
+            alert("Payment successful and verified!");
+          } catch (err) {
+            console.error("Verification error:", err);
+            setError(err.message);
+          }
+        },
       };
 
       const rzp = new window.Razorpay(options);
-      rzp.on("payment.failed", (response) => {
-        throw new Error(response.error.description)
-      });
       rzp.open();
     } catch (err) {
       setError(err.message);
@@ -60,7 +75,6 @@ function App() {
   return (
     <div className="payment-container">
       <h1>Razorpay Checkout</h1>
-      <p>Click below to pay ₹500</p>
       <button onClick={handlePayment} disabled={loading}>
         {loading ? "Processing..." : "Pay ₹500"}
       </button>
