@@ -51,7 +51,7 @@ const generateAIStream = async (userMessage, history, onChunk, onDone) => {
 
         // 5. Build strict streaming session
         const responseStream = await ai.models.generateContentStream({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-3.5-flash',
             contents: contents,
             config: {
                 systemInstruction: `You are a professional website support assistant for Vivid Nexus.
