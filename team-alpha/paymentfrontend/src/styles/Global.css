@@ -1,0 +1,40 @@
+:root {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --dark: #0f172a;
+  --text: #475569;
+  --background: #f8fafc;
+  --white: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--dark);
+}
+
+main {
+  min-height: 100vh;
+}
+
+section {
+  width: 100%;
+}
+
+.container {
+  width: min(92%, 1200px);
+  margin: auto;
+}
+
+button {
+  border: none;
+}
+
+input,
+button {
+  font-family: inherit;
+}
+
+::selection {
+  background: #2563eb;
+  color: white;
+}
