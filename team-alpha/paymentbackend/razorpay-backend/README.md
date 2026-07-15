@@ -1,13 +1,4 @@
-# 🎈 Your Backend — Explained Super Simple
 
-Imagine your project is a restaurant:
-- **Frontend** (Somya's job) = the menu and tables customers see 🍽️
-- **Backend** (YOUR job) = the kitchen where the real cooking happens 👨‍🍳
-- **Razorpay** = the bank/cashier who actually handles money 💳
-
-Your job today: build the kitchen (backend) that talks to the cashier (Razorpay).
-
----
 
 ## 🪜 STEP-BY-STEP ROADMAP
 
@@ -84,26 +75,10 @@ If you see this message, you did it right:
 
 ---
 
-## 📤 What to do next (uploading to GitHub)
-
-1. Ask Ruturaj (your team lead) to add you as a collaborator to the GitHub repo
-2. In VS Code terminal, inside your `razorpay-backend` folder, run:
-```
-git init
-git add .
-git commit -m "Backend: Razorpay integration done"
-git branch -M main
-git remote add origin <REPO_LINK_FROM_RUTURAJ>
-git push -u origin main
-```
-3. Message the group: "Backend is ready and pushed! ✅"
-
----
-
 ## 🧠 Quick Recap (in case someone asks what you did)
 - I built a **Node.js + Express server**
 - It has **2 APIs**:
   - `/api/payment/create-order` → creates a Razorpay test order
   - `/api/payment/verify` → checks if the payment was genuine
 - I tested it using a fake test card and it worked
-- Somya's frontend will call these same 2 APIs from her Pay Now button
+
