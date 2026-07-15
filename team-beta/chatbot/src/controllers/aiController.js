@@ -7,15 +7,18 @@ const handleChatStream = async (req, res) => {
         return res.status(400).json({ error: "Message content payload required." });
     }
 
-    // Lock HTTP server headers to persistent data transfer mode
+    // Set headers for streaming (chunked transfer encoding)
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Transfer-Encoding', 'chunked');
+
+    let chunksSent = 0;
 
     try {
         await generateAIStream(
             message,
             history || [],
             (textChunk) => {
+                chunksSent++;
                 res.write(textChunk); // Pipes parts straight to your widget.js
             },
             () => {
@@ -24,7 +27,13 @@ const handleChatStream = async (req, res) => {
         );
     } catch (error) {
         console.error("Controller pipeline execution failure:", error);
-        res.write("Sorry, I had an internal error formulating that answer.");
+        
+        // If the API failed immediately (0 chunks sent), we can adjust status
+        if (chunksSent === 0 && !res.headersSent) {
+            res.statusCode = 503; 
+        }
+        
+        res.write("\n[Internal Error: The AI service is temporarily busy. Please try again in a moment.]");
         res.end();
     }
 };
