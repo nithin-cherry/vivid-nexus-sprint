@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Test My Backend</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 400px; margin: 60px auto; }
+  input { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; }
+  button { width: 100%; padding: 12px; background: #3399cc; color: white; border: none; font-size: 16px; cursor: pointer; }
+  #status { margin-top: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h2>🧪 Test Payment (This is JUST for testing your backend)</h2>
+<p>Somya will build the real, pretty frontend. This page only exists so <b>you</b> can check your backend works.</p>
+
+<input id="name" placeholder="Your Name" value="Het Patel" />
+<input id="email" placeholder="Your Email" value="test@example.com" />
+<input id="amount" placeholder="Amount in Rupees" value="500" />
+<button onclick="payNow()">Pay Now</button>
+<div id="status"></div>
+
+<script>
+  const BACKEND_URL = "http://localhost:5000"; // change if your backend runs elsewhere
+
+  async function payNow() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const amount = document.getElementById("amount").value;
+    document.getElementById("status").innerText = "Creating order...";
+
+    // Step 1: Ask backend to create an order
+    const orderRes = await fetch(BACKEND_URL + "/api/payment/create-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, amount }),
+    });
+    const orderData = await orderRes.json();
+
+    if (!orderData.success) {
+      document.getElementById("status").innerText = "❌ Failed to create order";
+      return;
+    }
+
+    // Step 2: Open Razorpay's payment popup
+    const options = {
+      key: orderData.key_id,
+      amount: orderData.order.amount,
+      currency: "INR",
+      name: "Basic Payment Portal",
+      description: "Test Transaction",
+      order_id: orderData.order.id,
+      handler: async function (response) {
+        // Step 3: Send payment details back to backend to verify
+        document.getElementById("status").innerText = "Verifying payment...";
+        const verifyRes = await fetch(BACKEND_URL + "/api/payment/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(response),
+        });
+        const verifyData = await verifyRes.json();
+        if (verifyData.success) {
+          document.getElementById("status").innerText = "✅ Payment Successful!";
+        } else {
+          document.getElementById("status").innerText = "❌ Payment Verification Failed";
+        }
+      },
+      prefill: { name, email },
+      theme: { color: "#3399cc" },
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.on("payment.failed", function () {
+      document.getElementById("status").innerText = "❌ Payment Failed";
+    });
+    rzp.open();
+  }
+</script>
+
+</body>
+</html>

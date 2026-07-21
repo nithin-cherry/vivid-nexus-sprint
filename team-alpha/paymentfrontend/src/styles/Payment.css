@@ -1,0 +1,255 @@
+.payment-section{
+  padding:100px 0;
+}
+
+
+.payment-container{
+
+  width:min(92%,700px);
+
+  margin:auto;
+
+  text-align:center;
+
+}
+
+
+.payment-tag{
+
+  display:inline-block;
+
+  padding:10px 20px;
+
+  background:#dbeafe;
+
+  color:#2563eb;
+
+  border-radius:40px;
+
+  font-weight:600;
+
+  margin-bottom:20px;
+
+}
+
+
+.payment-container h2{
+
+  font-size:2.5rem;
+
+  margin-bottom:15px;
+
+  color:#0f172a;
+
+}
+
+
+.payment-container p{
+
+  color:#64748b;
+
+  margin-bottom:40px;
+
+}
+
+
+.payment-card{
+
+  background:white;
+
+  padding:40px;
+
+  border-radius:24px;
+
+  box-shadow:0 20px 45px rgba(0,0,0,.08);
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:18px;
+
+  text-align:left;
+
+  transition:.3s;
+
+}
+
+
+.payment-card:hover{
+
+  transform:translateY(-6px);
+
+}
+
+
+.payment-card label{
+
+  font-weight:600;
+
+  color:#334155;
+
+}
+
+
+.payment-card input{
+
+  padding:16px;
+
+  border:1px solid #dbe4f0;
+
+  border-radius:14px;
+
+  font-size:1rem;
+
+  transition:.3s;
+
+  outline:none;
+
+}
+
+
+.payment-card input:focus{
+
+  border-color:#2563eb;
+
+  box-shadow:0 0 0 4px rgba(37,99,235,.15);
+
+}
+
+
+.payment-card input:disabled{
+
+  background:#f8fafc;
+
+  cursor:not-allowed;
+
+  opacity:.75;
+
+}
+
+
+.payment-card button{
+
+  margin-top:10px;
+
+  padding:17px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+  color:white;
+
+  font-size:1rem;
+
+  font-weight:700;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:10px;
+
+  transition:.3s;
+
+  cursor:pointer;
+
+}
+
+
+.payment-card button:hover:not(:disabled){
+
+  transform:translateY(-3px);
+
+  box-shadow:0 18px 35px rgba(37,99,235,.28);
+
+}
+
+
+.payment-card button:disabled{
+
+  opacity:.7;
+
+  cursor:not-allowed;
+
+}
+
+
+.payment-info{
+
+  margin-top:10px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:10px;
+
+  color:#64748b;
+
+}
+
+
+.accepted-methods{
+
+  margin-top:20px;
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:12px;
+
+  flex-wrap:wrap;
+
+}
+
+
+.accepted-methods span{
+
+  padding:8px 14px;
+
+  background:#f1f5f9;
+
+  border-radius:30px;
+
+  font-size:.9rem;
+
+  font-weight:600;
+
+  color:#475569;
+
+}
+
+
+/* Loading Spinner */
+
+.spin{
+
+  animation:spin 1s linear infinite;
+
+}
+
+
+@keyframes spin{
+
+  from{
+
+    transform:rotate(0deg);
+
+  }
+
+  to{
+
+    transform:rotate(360deg);
+
+  }
+
+}

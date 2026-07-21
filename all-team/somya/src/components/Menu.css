@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap");
+
+
+.menu{
+
+    background:#f8f5f2;
+    padding:100px 0;
+    position:relative;
+
+}
+
+
+.menu-container{
+
+    width:min(92%,1280px);
+    margin:auto;
+
+}
+
+
+/* HEADING */
+
+.menu .section-heading{
+
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 60px;
+
+}
+
+
+.menu .section-heading span{
+
+    color:#c89b5c;
+    font-size:.9rem;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+}
+
+
+.menu .section-heading h2{
+
+    font-family:"Playfair Display",serif;
+    font-size:clamp(2.2rem,4vw,3.5rem);
+    color:#2c1815;
+    margin:15px 0;
+
+}
+
+
+.menu .section-heading p{
+
+    color:#777;
+    line-height:1.7;
+
+}
+
+
+
+/* GRID */
+
+.coffee-grid{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+
+}
+
+
+
+/* CARD */
+
+.coffee-card{
+
+    background:white;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s ease;
+
+}
+
+
+.coffee-card:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.15);
+
+}
+
+
+
+/* IMAGE */
+
+.coffee-image{
+
+    height:300px;
+
+    overflow:hidden;
+
+}
+
+
+.coffee-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s ease;
+
+}
+
+
+
+.coffee-card:hover .coffee-image img{
+
+    transform:scale(1.1);
+
+}
+
+
+
+/* CONTENT */
+
+.coffee-content{
+
+    padding:25px;
+
+}
+
+
+
+.coffee-rating{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#c89b5c;
+
+    margin-bottom:10px;
+
+}
+
+
+.coffee-rating span{
+
+    color:#555;
+
+    font-size:.9rem;
+
+    font-weight:500;
+
+}
+
+
+
+.coffee-content h3{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:1.5rem;
+
+    color:#2c1815;
+
+    margin:10px 0;
+
+}
+
+
+
+.coffee-content p{
+
+    color:#777;
+
+    font-size:.9rem;
+
+    line-height:1.7;
+
+    min-height:55px;
+
+}
+
+
+
+/* BOTTOM */
+
+.coffee-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:25px;
+
+}
+
+
+
+.coffee-bottom h4{
+
+    margin:0;
+
+    font-size:1.4rem;
+
+    color:#4b2e2b;
+
+    font-family:"Playfair Display",serif;
+
+}
+
+
+
+.coffee-bottom button{
+
+    border:none;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 18px;
+
+    border-radius:50px;
+
+    background:#4b2e2b;
+
+    color:white;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+
+
+.coffee-bottom button:hover{
+
+    background:#c89b5c;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* TABLET */
+
+@media(max-width:1100px){
+
+
+.coffee-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+
+.menu{
+
+    padding:70px 0;
+
+}
+
+
+.menu-container{
+
+    width:94%;
+
+}
+
+
+.coffee-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.coffee-image{
+
+    height:280px;
+
+}
+
+
+.coffee-content{
+
+    padding:22px;
+
+}
+
+
+}
+
+
+
+/* LARGE DISPLAY */
+
+@media(min-width:1700px){
+
+
+.menu-container{
+
+    max-width:1500px;
+
+}
+
+
+.coffee-grid{
+
+    gap:40px;
+
+}
+
+
+.coffee-image{
+
+    height:360px;
+
+}
+
+
+}

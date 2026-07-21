@@ -1,0 +1,6 @@
+Flask
+python-barcode
+Pillow
+pyzbar
+opencv-python
+gunicorn
