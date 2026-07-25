@@ -1,5 +1,3 @@
-
-
 export const LEVELS = [
   {
     id: "01",
@@ -99,16 +97,7 @@ export const LEVELS = [
     subtitle: "The look your brand gets recognized by, everywhere it shows up.",
     url: "vividnexus.in/identity",
     plans: [
-          
-
-      {
-        tag: "MONTHLY",
-        title: "Social Media Authority Pack",
-        audience: "Bootstrap projects, founders on LinkedIn/IG",
-        price: "1,999",
-        per: "month",
-        desc: "12 premium, high-contrast post layouts customized to your brand kit, delivered every month.",
-      },
+        
        {
         tag: "MONTHLY",
         title: "Social Media Authority Pack",
