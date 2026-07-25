@@ -284,4 +284,3 @@ export default function Showcase() {
     </div>
   );
 }
->>>>>>> origin/main
