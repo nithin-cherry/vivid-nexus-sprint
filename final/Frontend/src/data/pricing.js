@@ -17,14 +17,7 @@ export const LEVELS = [
         per: "one-time",
         desc: "Sub-1s load speed, a fluid one-page responsive frame with modern gradient layers, optimized for cross-device visibility.",
       },
-      {
-  tag: "MONTHLY",
-  title: "The Viral Growth Engine",
-  audience: "D2C brands, creators, local shops, doctors, real estate agents, personal brands",
-  price: "5,999",
-  per: "month",
-  desc: "Transform raw phone footage into high-retention Reels with strategic editing, trend-driven optimization, and content designed to attract clients, generate leads, and accelerate Instagram growth."
-}
+  
       {
         tag: "ONE-TIME",
         title: "Micro-Leads Landing Page",
@@ -107,6 +100,14 @@ export const LEVELS = [
     subtitle: "The look your brand gets recognized by, everywhere it shows up.",
     url: "vividnexus.in/identity",
     plans: [
+          {
+  tag: "MONTHLY",
+  title: "The Viral Growth Engine",
+  audience: "D2C brands, creators, local shops, doctors, real estate agents, personal brands",
+  price: "5,999",
+  per: "month",
+  desc: "Transform raw phone footage into high-retention Reels with strategic editing, trend-driven optimization, and content designed to attract clients, generate leads, and accelerate Instagram growth."
+},
       {
         tag: "MONTHLY",
         title: "Social Media Authority Pack",
