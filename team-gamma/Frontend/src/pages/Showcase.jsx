@@ -141,7 +141,7 @@ export default function Showcase() {
     </div>
   );
 }
-=======
+
 import "../styles/showcase.css";
 
 const projects = [
