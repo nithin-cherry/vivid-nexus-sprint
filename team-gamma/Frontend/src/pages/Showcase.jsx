@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import "../styles/showcase.css";
 
 const projects = [
