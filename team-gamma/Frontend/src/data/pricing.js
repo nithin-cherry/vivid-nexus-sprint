@@ -100,6 +100,14 @@ export const LEVELS = [
     url: "vividnexus.in/identity",
     plans: [
       {
+  tag: "MONTHLY",
+  title: "The Viral Growth Engine",
+  audience: "D2C brands, creators, local shops, doctors, real estate agents, personal brands",
+  price: "5,999",
+  per: "month",
+  desc: "Turn raw phone videos into high-retention client acquisition machines. Includes professional reel editing, hook optimization, captions, trend adaptation, and content structured to generate leads, inquiries, and consistent Instagram growth."
+},
+      {
         tag: "MONTHLY",
         title: "Social Media Authority Pack",
         audience: "Bootstrap projects, founders on LinkedIn/IG",
