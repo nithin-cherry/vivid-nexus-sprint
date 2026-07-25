@@ -18,6 +18,14 @@ export const LEVELS = [
         desc: "Sub-1s load speed, a fluid one-page responsive frame with modern gradient layers, optimized for cross-device visibility.",
       },
       {
+  tag: "MONTHLY",
+  title: "The Viral Growth Engine",
+  audience: "D2C brands, creators, local shops, doctors, real estate agents, personal brands",
+  price: "5,999",
+  per: "month",
+  desc: "Transform raw phone footage into high-retention Reels with strategic editing, trend-driven optimization, and content designed to attract clients, generate leads, and accelerate Instagram growth."
+}
+      {
         tag: "ONE-TIME",
         title: "Micro-Leads Landing Page",
         audience: "Creators, webinar hosts, consultants",
