@@ -1,5 +1,4 @@
-// Vivid Nexus — Expanded Infrastructure & Pricing Engine
-// Source of truth for every plan shown in the Services section.
+
 
 export const LEVELS = [
   {
@@ -103,6 +102,14 @@ export const LEVELS = [
           
 
       {
+        tag: "MONTHLY",
+        title: "Social Media Authority Pack",
+        audience: "Bootstrap projects, founders on LinkedIn/IG",
+        price: "1,999",
+        per: "month",
+        desc: "12 premium, high-contrast post layouts customized to your brand kit, delivered every month.",
+      },
+       {
         tag: "MONTHLY",
         title: "Social Media Authority Pack",
         audience: "Bootstrap projects, founders on LinkedIn/IG",
